@@ -5,15 +5,15 @@ func lengthOfLongestSubstring(_ s: String) -> Int {
         return 0
     }
     
-    var dict: [String.Element: Int] = [:]
+    var notReapeatingCharactersMap: [String.Element: Int] = [:]
     var maxLength = 0
            
-    for (end, c) in s.enumerated() {
-        if let existingIndex = dict[c] {
-            dict = dict.filter { $0.value >= existingIndex + 1 }
+    for (characterPosition, character) in s.enumerated() {
+        if let existingIndex = notReapeatingCharactersMap[character] {
+            notReapeatingCharactersMap = notReapeatingCharactersMap.filter { $0.value >= existingIndex + 1 }
         }
-        dict[c] = end
-        maxLength = max(dict.count, maxLength)
+        notReapeatingCharactersMap[character] = characterPosition
+        maxLength = max(notReapeatingCharactersMap.count, maxLength)
     }
     
     return maxLength
